@@ -45,25 +45,26 @@
         updateBannerVisibility();
       }
 
-      // --- SETTINGS START ---
+      // --- CONFIGURATION START ---
       var buildUrl = "Build";
-      // This version variable forces the browser to ignore its cache and download fresh files
-      var version = "?v=" + new Date().getTime(); 
-      
-      var loaderUrl = buildUrl + "/GoldProgress.loader.js" + version;
+      // Using a simple version string to help bypass browser cache
+      var v = "?v=1"; 
+
+      var loaderUrl = buildUrl + "/GoldProgress.loader.js" + v;
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/GoldProgress.data" + version,
-        frameworkUrl: buildUrl + "/GoldProgress.framework.js" + version,
-        codeUrl: buildUrl + "/GoldProgress.wasm" + version,
+        dataUrl: buildUrl + "/GoldProgress.data" + v,
+        frameworkUrl: buildUrl + "/GoldProgress.framework.js" + v,
+        codeUrl: buildUrl + "/GoldProgress.wasm" + v,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "AlphaPrototype",
         productVersion: "0.1.0",
         showBanner: unityShowBanner,
-        webassemblyStreaming: false, // Prevents GitHub Pages CORS/Streaming errors
+        // CRITICAL: GitHub Pages does not support WASM streaming
+        webassemblyStreaming: false, 
       };
-      // --- SETTINGS END ---
+      // --- CONFIGURATION END ---
 
       if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
         var meta = document.createElement('meta');
