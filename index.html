@@ -47,18 +47,21 @@
 
       // --- SETTINGS START ---
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/GoldProgress.loader.js";
+      // This version variable forces the browser to ignore its cache and download fresh files
+      var version = "?v=" + new Date().getTime(); 
+      
+      var loaderUrl = buildUrl + "/GoldProgress.loader.js" + version;
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/GoldProgress.data",
-        frameworkUrl: buildUrl + "/GoldProgress.framework.js",
-        codeUrl: buildUrl + "/GoldProgress.wasm",
+        dataUrl: buildUrl + "/GoldProgress.data" + version,
+        frameworkUrl: buildUrl + "/GoldProgress.framework.js" + version,
+        codeUrl: buildUrl + "/GoldProgress.wasm" + version,
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "AlphaPrototype",
         productVersion: "0.1.0",
         showBanner: unityShowBanner,
-        webassemblyStreaming: false, // Added to fix GitHub Pages fetch error
+        webassemblyStreaming: false, // Prevents GitHub Pages CORS/Streaming errors
       };
       // --- SETTINGS END ---
 
